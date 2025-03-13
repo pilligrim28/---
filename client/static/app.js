@@ -28,6 +28,11 @@ async function loadSubscribers() {
         console.error('Ошибка загрузки абонентов:', error);
     }
 }
+function showMainPanel() {
+  
+document.getElementById('bsuStatus').textContent = 'Подключено';
+document.getElementById('bsuStatus').style.color = 'green'; // Скрываем панель входа
+}
 
 // Обновление списка абонентов
 function updateSubscriberList(subscribers) {
@@ -70,17 +75,16 @@ function createNeonIcon(iconType) {
 async function connectToBSU() {
     const ip = document.getElementById('bsuIp').value || '10.21.50.5';
     const port = document.getElementById('bsuPort').value || 2323;
-    const dispatcherId = prompt('Введите ID диспетчера:'); // Запрос ID диспетчера
-
+    
+    // Показываем модальное окно для ввода ID диспетчера
+    const dispatcherId = prompt('Введите ID диспетчера:');
     if (!dispatcherId) {
         alert('ID диспетчера не указан');
         return;
     }
 
-    const url = `http://${ip}:${port}/api/connect`;
-
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`http://${ip}:${port}/api/connect`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ dispatcherId })
@@ -91,7 +95,8 @@ async function connectToBSU() {
             currentDispatcherId = dispatcherId;
             document.getElementById('bsuStatus').textContent = 'Подключено';
             document.getElementById('bsuStatus').style.color = 'green';
-            loadGroups(); // Загружаем группы после подключения
+            showMainPanel(); // Открываем основную панель
+            loadGroups(); 
         } else {
             alert('Ошибка подключения к БСУ');
         }
@@ -287,25 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Функция подключения к БСУ
-async function connectToBSU() {
-    const ip = document.getElementById('bsuIp').value;
-    const port = document.getElementById('bsuPort').value;
-    
-    try {
-        const response = await fetch('/api/connect-bsu', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ ip, port })
-        });
-        
-        if (response.ok) {
-            updateConnectionStatus(true);
-            loadDispatcherList();
-        }
-    } catch (error) {
-        console.error('Ошибка подключения:', error);
-    }
-}
+
 
 // Обновление статуса подключения
 function updateConnectionStatus(isConnected) {

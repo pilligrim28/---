@@ -13,6 +13,14 @@
         <span id="connectionStatus">Статус: Не подключено</span>
     </div>
     <div class="container">
+        <div id="loginPanel">
+            <!-- Поля для IP/Port и кнопка подключения -->
+            <button onclick="connectToBSU()">Подключиться</button>
+        </div>
+        
+        <div id="mainPanel" style="display: none;">
+            <!-- Панель с кнопками PTT, сообщениями и т.д. -->
+        </div>
         <!-- Левая панель -->
         <div class="sidebar">
             <div class="panel-header">
