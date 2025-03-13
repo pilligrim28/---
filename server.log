@@ -1,0 +1,30 @@
+{"level":"info","msg":"Initializing server...","time":"2025-03-13 16:38:18"}
+{"level":"info","msg":"Server started","port":8080,"time":"2025-03-13 16:38:18"}
+{"level":"info","msg":"\"GET http://localhost:8080/ HTTP/1.1\" from [::1]:50993 - 200 4353B in 75.9802ms","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"\"GET http://localhost:8080/styles.css HTTP/1.1\" from [::1]:50993 - 200 4040B in 0s","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"\"GET http://localhost:8080/app.js HTTP/1.1\" from [::1]:50993 - 200 9035B in 0s","time":"2025-03-13 16:38:23"}
+{"level":"debug","method":"GET","msg":"Handling request","path":"/api/subscribers","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"\"GET http://localhost:8080/api/subscribers HTTP/1.1\" from [::1]:50993 - 200 165B in 7.9ms","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"\"GET http://localhost:8080/static/icons/undefined.png HTTP/1.1\" from [::1]:50993 - 404 19B in 0s","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"\"GET http://localhost:8080/icons/undefined.png HTTP/1.1\" from [::1]:50994 - 404 19B in 0s","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"\"GET http://localhost:8080/favicon.ico HTTP/1.1\" from [::1]:50994 - 404 19B in 0s","time":"2025-03-13 16:38:23"}
+{"level":"info","msg":"Initializing server...","time":"2025-03-13 16:39:57"}
+{"level":"info","msg":"Server started","port":8080,"time":"2025-03-13 16:39:57"}
+{"level":"info","msg":"Initializing server...","time":"2025-03-13 17:03:09"}
+{"level":"info","msg":"Server started","port":8080,"time":"2025-03-13 17:03:09"}
+{"level":"info","msg":"\"GET http://localhost:8080/ HTTP/1.1\" from [::1]:51125 - 200 4512B in 77.0074ms","time":"2025-03-13 17:03:19"}
+{"level":"info","msg":"\"GET http://localhost:8080/styles.css HTTP/1.1\" from [::1]:51125 - 200 4385B in 0s","time":"2025-03-13 17:03:19"}
+{"level":"info","msg":"\"GET http://localhost:8080/app.js HTTP/1.1\" from [::1]:51125 - 200 10437B in 0s","time":"2025-03-13 17:03:19"}
+{"level":"debug","method":"GET","msg":"Handling request","path":"/api/subscribers","time":"2025-03-13 17:03:19"}
+{"level":"info","msg":"\"GET http://localhost:8080/api/subscribers HTTP/1.1\" from [::1]:51125 - 200 165B in 1.0065ms","time":"2025-03-13 17:03:19"}
+{"level":"info","msg":"\"GET http://localhost:8080/icons/undefined.png HTTP/1.1\" from [::1]:51125 - 404 19B in 0s","time":"2025-03-13 17:03:19"}
+{"level":"info","msg":"\"GET http://localhost:8080/static/icons/undefined.png HTTP/1.1\" from [::1]:51126 - 404 19B in 834.2µs","time":"2025-03-13 17:03:19"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51126 - 404 19B in 0s","time":"2025-03-13 17:03:22"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51126 - 404 19B in 122.8µs","time":"2025-03-13 17:03:42"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51126 - 404 19B in 92.3µs","time":"2025-03-13 17:03:45"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51126 - 404 19B in 0s","time":"2025-03-13 17:03:54"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51126 - 404 19B in 169.8µs","time":"2025-03-13 17:03:54"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51126 - 404 19B in 0s","time":"2025-03-13 17:03:55"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:51166 - 404 19B in 0s","time":"2025-03-13 17:06:06"}
+{"level":"info","msg":"\"GET http://localhost:8080/api/dispatchers HTTP/1.1\" from [::1]:51168 - 404 19B in 0s","time":"2025-03-13 17:06:14"}
+{"level":"info","msg":"\"GET http://localhost:8080/api/dispatchers/dispatcher1/groups HTTP/1.1\" from [::1]:51169 - 200 82B in 279.5µs","time":"2025-03-13 17:06:21"}

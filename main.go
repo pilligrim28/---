@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	//"encoding/json"
 	"io/fs"
 	"net/http"
 	"os"
@@ -67,6 +66,8 @@ func main() {
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		logger.Log.WithError(err).Fatal("Server startup failed")
 	}
+	r.Post("/api/connect-bsu", connectToBSU)
+	r.Get("/api/dispatchers", getDispatchers)
 }
 
 func serveClientFiles() http.HandlerFunc {

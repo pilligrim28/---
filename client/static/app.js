@@ -270,3 +270,42 @@ function saveSettings() {
 document.addEventListener('DOMContentLoaded', () => {
     initMap();
 });
+
+// Функция подключения к БСУ
+async function connectToBSU() {
+    const ip = document.getElementById('bsuIp').value;
+    const port = document.getElementById('bsuPort').value;
+    
+    try {
+        const response = await fetch('/api/connect-bsu', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ ip, port })
+        });
+        
+        if (response.ok) {
+            updateConnectionStatus(true);
+            loadDispatcherList();
+        }
+    } catch (error) {
+        console.error('Ошибка подключения:', error);
+    }
+}
+
+// Обновление статуса подключения
+function updateConnectionStatus(isConnected) {
+    const statusElement = document.getElementById('connectionStatus');
+    statusElement.textContent = isConnected ? "Подключено" : "Не подключено";
+    statusElement.style.color = isConnected ? "#00ff00" : "#ff0000";
+}
+
+// Загрузка списка диспетчеров
+async function loadDispatcherList() {
+    try {
+        const response = await fetch('/api/dispatchers');
+        const dispatchers = await response.json();
+        renderDispatchers(dispatchers);
+    } catch (error) {
+        console.error('Ошибка загрузки диспетчеров:', error);
+    }
+}

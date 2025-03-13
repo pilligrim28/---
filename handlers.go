@@ -4,12 +4,43 @@ import (
 	"encoding/json"
 	"net/http"
 	"os"
-
+	
 	"server/logger"
-
+	
 	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
 )
+// Добавляем структуры для работы с БСУ
+type BSUSettings struct {
+    IP   string `json:"ip"`
+    Port int    `json:"port"`
+}
+
+var currentBSUSettings BSUSettings
+
+// Обработчик подключения к БСУ
+func connectToBSU(w http.ResponseWriter, r *http.Request) {
+    var settings BSUSettings
+    if err := json.NewDecoder(r.Body).Decode(&settings); err != nil {
+        logger.Log.WithError(err).Warn("Ошибка декодирования настроек БСУ")
+        http.Error(w, "Bad Request", http.StatusBadRequest)
+        return
+    }
+
+    // Сохраняем настройки
+    currentBSUSettings = settings
+    
+    logger.Log.WithFields(logrus.Fields{
+        "ip":   settings.IP,
+        "port": settings.Port,
+    }).Info("Успешное подключение к БСУ")
+    
+    w.WriteHeader(http.StatusOK)
+    json.NewEncoder(w).Encode(map[string]string{"status": "connected"})
+}
+
+// Добавляем эндпоинт в роутер (main.go)
+
 
 func getSubscribers(w http.ResponseWriter, r *http.Request) {
 	logger.Log.WithFields(logrus.Fields{
@@ -100,3 +131,15 @@ func saveSubscribers(subs []Subscriber) {
 		logger.Log.WithError(err).Error("Failed to save subscribers data")
 	}
 }
+
+// В handlers.go
+func getDispatchers(w http.ResponseWriter, r *http.Request) {
+    dispatcherList := make([]string, 0, len(dispatchers))
+    for k := range dispatchers {
+        dispatcherList = append(dispatcherList, k)
+    }
+    
+    json.NewEncoder(w).Encode(dispatcherList)
+}
+
+// В роутер (main.go)
