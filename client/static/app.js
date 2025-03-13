@@ -142,29 +142,44 @@ async function addSubscriber() {
 }
 
 // Подключение к БСУ
+let currentDispatcherId = null;
+
 async function connectToBSU() {
-    const ip = document.getElementById('bsuIp').value || '10.21.50.5';
-    const port = document.getElementById('bsuPort').value || 2323;
-    const url = `http://${ip}:${port}/api/connect`;
+    const ip = document.getElementById('bsuIp').value;
+    const port = document.getElementById('bsuPort').value;
+    const dispatcherId = document.getElementById('dispatcherId').value;
 
     try {
-        const response = await fetch(url, { method: 'POST' });
+        const response = await fetch('/api/connect-bsu', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                ip: ip,
+                port: port,
+                dispatcherId: dispatcherId
+            })
+        });
+        
         if (response.ok) {
-            bsuConnected = true;
-            document.getElementById('bsuStatus').textContent = 'Подключено';
-            document.getElementById('bsuStatus').style.color = 'green';
+            const data = await response.json();
+            currentDispatcherId = data.dispatcherId;
+            updateConnectionStatus(true);
             loadGroups();
-        } else {
-            alert('Ошибка подключения к БСУ');
+            showMainPanel();
         }
     } catch (error) {
-        console.error('Ошибка:', error);
-        alert('Ошибка сети');
+        console.error('Ошибка подключения:', error);
+        updateConnectionStatus(false);
     }
 }
 
+function showMainPanel() {
+    document.getElementById('mainPanel').style.display = 'block';
+    document.getElementById('loginPanel').style.display = 'none';
+}
+
 // Загрузка групп
-let currentDispatcherId = null;
+
 
 // Загрузка групп при подключении к БСУ
 async function loadGroups() {

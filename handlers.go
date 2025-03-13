@@ -4,39 +4,40 @@ import (
 	"encoding/json"
 	"net/http"
 	"os"
-	
 	"server/logger"
-	
+
 	"github.com/go-chi/chi/v5"
 	"github.com/sirupsen/logrus"
 )
+
 // Добавляем структуры для работы с БСУ
-type BSUSettings struct {
-    IP   string `json:"ip"`
-    Port int    `json:"port"`
+type ConnectionRequest struct {
+    IP          string `json:"ip"`
+    Port        int    `json:"port"`
+    DispatcherID string `json:"dispatcherId"`
 }
 
-var currentBSUSettings BSUSettings
-
-// Обработчик подключения к БСУ
 func connectToBSU(w http.ResponseWriter, r *http.Request) {
-    var settings BSUSettings
-    if err := json.NewDecoder(r.Body).Decode(&settings); err != nil {
-        logger.Log.WithError(err).Warn("Ошибка декодирования настроек БСУ")
+    var req ConnectionRequest
+    if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+        logger.Log.WithError(err).Error("Ошибка декодирования запроса")
         http.Error(w, "Bad Request", http.StatusBadRequest)
         return
     }
 
-    // Сохраняем настройки
-    currentBSUSettings = settings
-    
+    // Логика подключения к БСУ
     logger.Log.WithFields(logrus.Fields{
-        "ip":   settings.IP,
-        "port": settings.Port,
-    }).Info("Успешное подключение к БСУ")
-    
+        "ip":          req.IP,
+        "port":        req.Port,
+        "dispatcherId": req.DispatcherID,
+    }).Info("Попытка подключения к БСУ")
+
+    // Здесь должна быть реальная логика подключения
     w.WriteHeader(http.StatusOK)
-    json.NewEncoder(w).Encode(map[string]string{"status": "connected"})
+    json.NewEncoder(w).Encode(map[string]string{
+        "status": "connected",
+        "dispatcherId": req.DispatcherID,
+    })
 }
 
 // Добавляем эндпоинт в роутер (main.go)

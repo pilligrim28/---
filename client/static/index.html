@@ -8,8 +8,9 @@
 </head>
 <body>
     <div class="connection-panel">
-        <span id="connectionStatus">Не подключено</span>
-        <div id="dispatcherList"></div>
+        <input type="text" id="dispatcherId" placeholder="ID диспетчера">
+        <button class="neon-button" onclick="connectToBSU()">Подключиться</button>
+        <span id="connectionStatus">Статус: Не подключено</span>
     </div>
     <div class="container">
         <!-- Левая панель -->
@@ -55,7 +56,7 @@
                     <button class="neon-button" onclick="switchPanel('map')">Карта</button>
                     <button class="neon-button" onclick="switchPanel('calls')">Вызовы</button>
                     <button class="neon-button" onclick="showSettings()">Настройки</button>
-                    <button class="neon-button" onclick="connectToBSU()">Подключиться к БСУ</button>
+                  
                 </div>
             </div>
             <div class="modal" id="settingsModal" style="display: none;">
