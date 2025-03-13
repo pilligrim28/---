@@ -1,0 +1,4 @@
+sip:
+  port: 5060
+http:
+  port: 8080
