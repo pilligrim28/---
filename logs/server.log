@@ -76,3 +76,27 @@
 {"level":"info","msg":"\"GET http://localhost:8080/api/subscribers HTTP/1.1\" from [::1]:53969 - 200 165B in 0s","time":"2025-03-14 13:35:43"}
 {"level":"info","msg":"\"GET http://localhost:8080/icons/undefined.png HTTP/1.1\" from [::1]:53968 - 404 19B in 0s","time":"2025-03-14 13:35:43"}
 {"level":"info","msg":"\"GET http://localhost:8080/static/icons/undefined.png HTTP/1.1\" from [::1]:53969 - 404 19B in 0s","time":"2025-03-14 13:35:43"}
+{"level":"info","msg":"Initializing server...","time":"2025-03-14 13:42:02"}
+{"level":"info","msg":"Server started","port":8080,"time":"2025-03-14 13:42:02"}
+{"level":"info","msg":"\"GET http://localhost:8080/ HTTP/1.1\" from [::1]:54631 - 200 5785B in 74.1392ms","time":"2025-03-14 13:42:10"}
+{"level":"info","msg":"\"GET http://localhost:8080/styles.css HTTP/1.1\" from [::1]:54631 - 200 4821B in 0s","time":"2025-03-14 13:42:10"}
+{"level":"info","msg":"\"GET http://localhost:8080/app.js HTTP/1.1\" from [::1]:54631 - 200 11415B in 592µs","time":"2025-03-14 13:42:10"}
+{"level":"debug","method":"GET","msg":"Handling request","path":"/api/subscribers","time":"2025-03-14 13:42:10"}
+{"level":"info","msg":"\"GET http://localhost:8080/api/subscribers HTTP/1.1\" from [::1]:54631 - 200 205B in 0s","time":"2025-03-14 13:42:10"}
+{"level":"info","msg":"\"GET http://localhost:8080/static/icons/.png HTTP/1.1\" from [::1]:54631 - 404 19B in 0s","time":"2025-03-14 13:42:10"}
+{"level":"info","msg":"\"GET http://localhost:8080/icons/.png HTTP/1.1\" from [::1]:54632 - 404 19B in 0s","time":"2025-03-14 13:42:10"}
+{"level":"info","msg":"\"GET http://localhost:8080/ HTTP/1.1\" from [::1]:54632 - 200 5785B in 261.2µs","time":"2025-03-14 13:42:12"}
+{"level":"info","msg":"\"GET http://localhost:8080/styles.css HTTP/1.1\" from [::1]:54632 - 200 4821B in 0s","time":"2025-03-14 13:42:12"}
+{"level":"info","msg":"\"GET http://localhost:8080/app.js HTTP/1.1\" from [::1]:54631 - 200 11415B in 0s","time":"2025-03-14 13:42:12"}
+{"level":"debug","method":"GET","msg":"Handling request","path":"/api/subscribers","time":"2025-03-14 13:42:12"}
+{"level":"info","msg":"\"GET http://localhost:8080/api/subscribers HTTP/1.1\" from [::1]:54631 - 200 205B in 0s","time":"2025-03-14 13:42:12"}
+{"level":"info","msg":"\"GET http://localhost:8080/icons/.png HTTP/1.1\" from [::1]:54632 - 404 19B in 0s","time":"2025-03-14 13:42:13"}
+{"level":"info","msg":"\"GET http://localhost:8080/static/icons/.png HTTP/1.1\" from [::1]:54631 - 404 19B in 0s","time":"2025-03-14 13:42:13"}
+{"error":"json: cannot unmarshal string into Go struct field ConnectionRequest.port of type int","level":"error","msg":"Ошибка декодирования запроса","time":"2025-03-14 13:42:25"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:54631 - 400 12B in 0s","time":"2025-03-14 13:42:25"}
+{"error":"json: cannot unmarshal string into Go struct field ConnectionRequest.port of type int","level":"error","msg":"Ошибка декодирования запроса","time":"2025-03-14 13:42:30"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:54631 - 400 12B in 0s","time":"2025-03-14 13:42:30"}
+{"error":"json: cannot unmarshal string into Go struct field ConnectionRequest.port of type int","level":"error","msg":"Ошибка декодирования запроса","time":"2025-03-14 13:42:37"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:54631 - 400 12B in 845.3µs","time":"2025-03-14 13:42:37"}
+{"error":"json: cannot unmarshal string into Go struct field ConnectionRequest.port of type int","level":"error","msg":"Ошибка декодирования запроса","time":"2025-03-14 13:42:42"}
+{"level":"info","msg":"\"POST http://localhost:8080/api/connect-bsu HTTP/1.1\" from [::1]:54631 - 400 12B in 0s","time":"2025-03-14 13:42:42"}
