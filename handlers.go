@@ -16,6 +16,14 @@ type ConnectionRequest struct {
     Port        int    `json:"port"`
     DispatcherID string `json:"dispatcherId"`
 }
+type Subscriber struct {
+    ID     string  `json:"id"`
+    Name   string  `json:"name"`   
+    Icon   string  `json:"icon"`  
+    Lat    float64 `json:"lat"`
+    Lon    float64 `json:"lon"`
+    Status string  `json:"status"`
+}
 
 func connectToBSU(w http.ResponseWriter, r *http.Request) {
     var req ConnectionRequest

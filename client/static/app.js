@@ -1,6 +1,5 @@
 let map;
 let markers = {};
-let bsuConnected = false;
 
 // Инициализация карты
 function initMap() {
@@ -147,7 +146,20 @@ async function addSubscriber() {
 }
 
 // Подключение к БСУ
+
+
+// app.js
+let bsuConnected = false;
 let currentDispatcherId = null;
+
+// Показать модальное окно подключения
+function showConnectModal() {
+    document.getElementById('connectModal').style.display = 'block';
+}
+
+// Основная функция подключения
+// Удалить дублирующуюся функцию connectToBSU()
+// Оставить только эту реализацию:
 
 async function connectToBSU() {
     const ip = document.getElementById('bsuIp').value;
@@ -158,11 +170,7 @@ async function connectToBSU() {
         const response = await fetch('/api/connect-bsu', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                ip: ip,
-                port: port,
-                dispatcherId: dispatcherId
-            })
+            body: JSON.stringify({ ip, port, dispatcherId })
         });
         
         if (response.ok) {
@@ -171,12 +179,28 @@ async function connectToBSU() {
             updateConnectionStatus(true);
             loadGroups();
             showMainPanel();
+        } else {
+            alert('Ошибка подключения: ' + await response.text());
         }
     } catch (error) {
-        console.error('Ошибка подключения:', error);
+        console.error('Ошибка:', error);
         updateConnectionStatus(false);
     }
 }
+
+// Обновление статуса подключения
+function updateConnectionStatus(isConnected) {
+    const statusElement = document.getElementById('connectionStatus');
+    statusElement.textContent = isConnected ? "Статус: Подключено" : "Статус: Не подключено";
+    statusElement.style.color = isConnected ? "#00ff00" : "#ff0000";
+}
+
+// Инициализация
+document.addEventListener('DOMContentLoaded', () => {
+    initMap();
+    document.getElementById('loginPanel').style.display = 'none';
+    showConnectModal();
+});
 
 function showMainPanel() {
     document.getElementById('mainPanel').style.display = 'block';

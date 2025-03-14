@@ -1,106 +1,145 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Neon Control Panel</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+  </head>
+  <body>
     <div class="connection-panel">
-        <input type="text" id="dispatcherId" placeholder="ID диспетчера">
-        <button class="neon-button" onclick="connectToBSU()">Подключиться</button>
-        <span id="connectionStatus">Статус: Не подключено</span>
+      <input type="text" id="dispatcherId" placeholder="ID диспетчера" />
+      <button class="neon-button" onclick="connectToBSU()">Подключиться</button>
+      <span id="connectionStatus">Статус: Не подключено</span>
     </div>
     <div class="container">
-        <div id="loginPanel">
-            <!-- Поля для IP/Port и кнопка подключения -->
-            <button onclick="connectToBSU()">Подключиться</button>
+      <div class="modal" id="connectModal" style="display: none">
+        <div class="modal-content">
+          <h3>Подключение к БСУ</h3>
+          <label for="bsuIp">IP БСУ:</label>
+          <input type="text" id="bsuIp" placeholder="10.21.50.5" />
+          <label for="bsuPort">Порт:</label>
+          <input type="number" id="bsuPort" placeholder="2323" />
+          <label for="dispatcherId">ID диспетчера:</label>
+          <input type="text" id="dispatcherId" placeholder="ID" />
+          <button class="neon-button" onclick="connectToBSU()">
+            Подключиться
+          </button>
+          <button class="neon-button" onclick="closeModal('connectModal')">
+            Отмена
+          </button>
         </div>
-        
-        <div id="mainPanel" style="display: none;">
-            <!-- Панель с кнопками PTT, сообщениями и т.д. -->
-        </div>
-        <!-- Левая панель -->
-        <div class="sidebar">
-            <div class="panel-header">
-                <h2 class="neon-text">Абоненты</h2>
-                <button class="neon-button" onclick="showAddForm()">+ Добавить</button>
-            </div>
-            <div class="subscriber-list" id="subscribers"></div>
-        </div>
-        <div class="modal" id="addSubscriberModal" style="display: none;">
-            <div class="modal-content">
-                <h3>Добавить абонента</h3>
-                <label for="subId">ID абонента:</label>
-                <input type="text" id="subId" placeholder="ID">
-                <label for="subName">Имя абонента:</label>
-                <input type="text" id="subName" placeholder="Имя">
-                <label>Иконка:</label>
-                <div class="icon-selector">
-                    <label><input type="radio" name="icon" value="radio" checked> Рация</label>
-                    <label><input type="car" name="icon" value="car"> Машина</label>
-                    <label><input type="" name="icon" value="person"> Человек</label>
-                </div>
-                <button onclick="addSubscriber()">Добавить</button>
-                <button onclick="closeModal()">Закрыть</button>
-            </div>
-        </div>
-        <!-- Основная область -->
-        <div class="main-content">
-            <div class="calls-panel" id="callsPanel" style="display: none;">
-                <h3>Панель вызовов</h3>
-                <div id="groupsContainer">
-                    <!-- Группы будут добавляться сюда -->
-                </div>
-            </div>
-            <!-- Верхняя панель -->
-            <div class="top-panel">
-                <div class="user-info">
-                    <span class="neon-text-accent">Оператор: </span>
-                    <span id="username">Admin</span>
-                </div>
-                <div class="controls">
-                    <button class="neon-button" onclick="switchPanel('map')">Карта</button>
-                    <button class="neon-button" onclick="switchPanel('calls')">Вызовы</button>
-                    <button class="neon-button" onclick="showSettings()">Настройки</button>
-                  
-                </div>
-            </div>
-            <div class="modal" id="settingsModal" style="display: none;">
-                <div class="modal-content">
-                    <h3>Настройки подключения</h3>
-                    <label for="bsuIp">IP БСУ:</label>
-                    <input type="text" id="bsuIp" placeholder="10.21.50.5">
-                    <label for="bsuPort">Порт:</label>
-                    <input type="number" id="bsuPort" placeholder="2323">
-                    <button onclick="saveSettings()">Сохранить</button>
-                    <button onclick="closeModal()">Закрыть</button>
-                </div>
-            </div>
+      </div>
 
-            <!-- Карта -->
-            <div id="map" class="neon-map"></div>
+      <div id="loginPanel">
+        <!-- Поля для IP/Port и кнопка подключения -->
+        <button onclick="connectToBSU()">Подключиться</button>
+      </div>
 
-            <!-- Панель PTT -->
-            <div class="ptt-panel">
-                <button class="ptt-button neon-pulse">PTT</button>
-            </div>
+      <div id="mainPanel" style="display: none">
+        <!-- Панель с кнопками PTT, сообщениями и т.д. -->
+      </div>
+      <!-- Левая панель -->
+      <div class="sidebar">
+        <div class="panel-header">
+          <h2 class="neon-text">Абоненты</h2>
+          <button class="neon-button" onclick="showAddForm()">
+            + Добавить
+          </button>
         </div>
-       
-        <!-- Футер с журналом -->
-        <div class="footer">
-            <div class="log-header">
-                <h3 class="neon-text">Журнал событий</h3>
-                <button class="neon-button small" onclick="clearLog()">Очистить</button>
+        <div class="subscriber-list" id="subscribers"></div>
+      </div>
+      <div class="modal" id="addSubscriberModal" style="display: none">
+        <div class="modal-content">
+          <h3>Добавить абонента</h3>
+          <label for="subId">ID абонента:</label>
+          <input type="text" id="subId" placeholder="ID" />
+          <label for="subName">Имя абонента:</label>
+          <input type="text" id="subName" placeholder="Имя" />
+          <label>Иконка:</label>
+          <div class="icon-selector">
+            <!-- Исправить тип radio-кнопок -->
+            <div class="icon-selector">
+              <label
+                ><input type="radio" name="icon" value="radio" checked />
+                Рация</label
+              >
+              <label
+                ><input type="radio" name="icon" value="car" /> Машина</label
+              >
+              <label
+                ><input type="radio" name="icon" value="person" />
+                Человек</label
+              >
             </div>
-            <div class="log-content" id="eventLog"></div>
+          </div>
+          <button onclick="addSubscriber()">Добавить</button>
+          <button onclick="closeModal()">Закрыть</button>
         </div>
+      </div>
+      <!-- Основная область -->
+      <div class="main-content">
+        <div class="calls-panel" id="callsPanel" style="display: none">
+          <h3>Панель вызовов</h3>
+          <div id="groupsContainer">
+            <!-- Группы будут добавляться сюда -->
+          </div>
+        </div>
+        <!-- Верхняя панель -->
+        <div class="top-panel">
+          <div class="user-info">
+            <span class="neon-text-accent">Оператор: </span>
+            <span id="username">Admin</span>
+          </div>
+          <div class="controls">
+            <button class="neon-button" onclick="switchPanel('map')">
+              Карта
+            </button>
+            <button class="neon-button" onclick="switchPanel('calls')">
+              Вызовы
+            </button>
+            <button class="neon-button" onclick="showSettings()">
+              Настройки
+            </button>
+          </div>
+        </div>
+        <div class="modal" id="settingsModal" style="display: none">
+          <div class="modal-content">
+            <h3>Настройки подключения</h3>
+            <label for="bsuIp">IP БСУ:</label>
+            <input type="text" id="bsuIp" placeholder="10.21.50.5" />
+            <label for="bsuPort">Порт:</label>
+            <input type="number" id="bsuPort" placeholder="2323" />
+            <button onclick="saveSettings()">Сохранить</button>
+            <button onclick="closeModal()">Закрыть</button>
+          </div>
+        </div>
+
+        <!-- Карта -->
+        <div id="map" class="neon-map"></div>
+
+        <!-- Панель PTT -->
+        <div class="ptt-panel">
+          <button class="ptt-button neon-pulse">PTT</button>
+        </div>
+      </div>
+
+      <!-- Футер с журналом -->
+      <div class="footer">
+        <div class="log-header">
+          <h3 class="neon-text">Журнал событий</h3>
+          <button class="neon-button small" onclick="clearLog()">
+            Очистить
+          </button>
+        </div>
+        <div class="log-content" id="eventLog"></div>
+      </div>
     </div>
-
-    
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

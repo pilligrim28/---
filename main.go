@@ -17,12 +17,6 @@ import (
 //go:embed all:client/static/*
 var clientFS embed.FS
 
-type Subscriber struct {
-	ID     string  `json:"id"`
-	Lat    float64 `json:"lat"`
-	Lon    float64 `json:"lon"`
-	Status string  `json:"status"`
-}
 
 type Group struct {
 	ID   string `json:"id"`
@@ -52,9 +46,11 @@ func main() {
 	r.Use(middleware.Recoverer)
 	
 	r.Route("/api", func(r chi.Router) {
-		r.Get("/subscribers", getSubscribers)
-		r.Post("/subscribers", addSubscriber)
-		r.Get("/dispatchers/{dispatcherId}/groups", getGroups)
+        r.Get("/subscribers", getSubscribers)
+        r.Post("/subscribers", addSubscriber)
+        r.Get("/dispatchers/{dispatcherId}/groups", getGroups)
+        r.Post("/connect-bsu", connectToBSU)      
+        r.Get("/dispatchers", getDispatchers) 
 	})
 	
 	r.Get("/*", serveClientFiles())
